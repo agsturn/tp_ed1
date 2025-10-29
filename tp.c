@@ -19,6 +19,8 @@ int main(){
         adicionaClausula(f, i, x, y, z);
     }
 
+        destroiFormula(f);
+    }
     return 0;
 }
 

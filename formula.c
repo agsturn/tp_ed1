@@ -10,7 +10,7 @@ Formula *criaFormula (int n, int m){
     }
     formula->numVar = n;
     formula->numClau = m;
-    formula->clausula == (Clausula *)malloc(m * sizeof(Clausula)); //aloca clausula
+    formula->clausula = (Clausula *)malloc(m * sizeof(Clausula)); //aloca clausula
     if (formula->clausula == NULL){ //tratamento de erro
         printf("memoria insuficiente");
         free(formula);
@@ -39,14 +39,14 @@ void imprimeFormula (Formula *formula){
         printf("(");
 
         for (int j=0;j<3;j++){
-           int num = formula->clausula[i].var[j];
-           int valor=num;
+           int valor = formula->clausula[i].var[j];
+           int num = valor;
 
+           char letra = 'a' + num - 1;
+           
            if(num<0){
                 num = num * -1; // transforma em positivo
            }
-
-           char letra = 'a' + num - 1
 
             if(num<0){ //confere se eh negativo
                     printf("¬%c", letra);
@@ -67,7 +67,9 @@ void imprimeFormula (Formula *formula){
 }
 
 
-int solucaoFormula (){
+int solucaoFormula (Formula *formula){
+    //função ainda não implementada
+    return 0;
 
 }
 
