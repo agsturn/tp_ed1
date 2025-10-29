@@ -20,7 +20,7 @@ void adicionaClausula (Formula *formula, int i, int x, int y, int z); //adiciona
 
 void imprimeFormula (Formula *formula); //imprime o TAD formula no formato 3-CNF
 
-int solucaoFormula (Formula *formula); //tenta achar uma valoração que satisfaça a fórmula
+int solucaoFormula (Formula *formula, int *valores, int indice); //tenta achar uma valoração que satisfaça a fórmula
 
 //Ana Gabriela e Marcus Leandro 
 #endif

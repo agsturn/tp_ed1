@@ -20,8 +20,9 @@ int main(){
     }
 
         destroiFormula(f);
+
+        return 0;
     }
-    return 0;
-}
+   
 
 //Ana Gabriela e Marcus Leandro 
