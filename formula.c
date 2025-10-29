@@ -32,9 +32,40 @@ void adicionaClausula (Formula *formula, int i, int x, int y, int z){
     formula->clausula[i].var[2] = z;
 }
 
-void imprimeFormula (){
+void imprimeFormula (Formula *formula){
+    printf("Formula:\n"); 
+    
+    for(int i=0;i<formula->numClau;i++){
+        printf("(");
 
+        for (int j=0;j<3;j++){
+           int num = formula->clausula[i].var[j];
+           int valor=num;
+
+           if(num<0){
+                num = num * -1; // transforma em positivo
+           }
+
+           char letra = 'a' + num - 1
+
+            if(num<0){ //confere se eh negativo
+                    printf("¬%c", letra);
+                } else {
+                    printf("%c", letra);
+                }
+
+                if (j < 2){
+                printf(" v ");
+                }
+        }
+        printf(") ");
+
+        if (i < formula->numClau - 1){
+            printf("^ ");
+        }
+    }
 }
+
 
 int solucaoFormula (){
 
