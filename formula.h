@@ -18,9 +18,9 @@ void destroiFormula (Formula *formula); //dar free no TAD formula
 
 void adicionaClausula (Formula *formula, int i, int x, int y, int z); //adiciona uma clausula na formula
 
-void imprimeFormula (); //imprime o TAD formula no formato 3-CNF
+void imprimeFormula (Formula *formula); //imprime o TAD formula no formato 3-CNF
 
-int solucaoFormula (); //tenta achar uma valoração que satisfaça a fórmula
+int solucaoFormula (Formula *formula); //tenta achar uma valoração que satisfaça a fórmula
 
 //Ana Gabriela e Marcus Leandro 
 #endif

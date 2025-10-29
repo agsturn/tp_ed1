@@ -67,10 +67,22 @@ void imprimeFormula (Formula *formula){
 }
 
 
-int solucaoFormula (Formula *formula){
-    //função ainda não implementada
+int solucaoFormula (Formula *formula,int *valores, int indice){
+    if(indice == formula->numVar){ // verifica se valoracao eh satisfeita
+        return 1; //achou uma solucao
+    }
+
+    valores[indice] = 1; // tenta como verdadeiro
+    if(solucaoFormula(formula, valores, indice + 1)){
+        return 1;       
+    }
+
+    valores[indice] = 0; // tenta como falso
+    if(solucaoFormula(formula, valores, indice + 1)){
+        return 1;
+    }
+
     return 0;
+} 
 
-}
-
-//Ana Gabriela e Marcus Leandro 
+//Ana Gabriela e Marcus Leandro
