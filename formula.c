@@ -10,7 +10,6 @@ struct formula //TAD da formula
 {
     int numVar; //numero de variaveis
     int numClau; //numero de clausulas
-    int *valores
     Clausula *clausula; //vetor de clausulas
 };
 
@@ -69,11 +68,11 @@ void imprimeFormula (Formula *formula){
             printf("^ ");
         }
     }
-    imprimesolucao(formula,);
+    imprimesolucao
 }
 
 
-int solucaoFormula (Formula *formula, int indice){
+int solucaoFormula (Formula *formula,int *valores, int indice){
     if(indice == formula->numVar){ // verifica se valoracao eh satisfeita
         return testeformula(formula,valores,indice); 
 
@@ -91,7 +90,7 @@ int solucaoFormula (Formula *formula, int indice){
     } 
 }
 
-void imprimesolucao(Formula *formula){
+void imprimesolucao(Formula *formula,int *valores){
     printf("Valoracao: \n");
     char letra = 'a'
     num = formula->clausula[i].var[j];
@@ -103,7 +102,7 @@ void imprimesolucao(Formula *formula){
     }
 }
 
-    int testeformula(Formula *formula,int indice){
+    int testeformula(Formula *formula,int *valores, int indice){
         int sol = 0;
         for(int i = 0;i <formula->numClau - 1 ;i++){
             for(int j = 0;j<3; j++){
