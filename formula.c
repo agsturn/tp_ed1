@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include "formula.h"
 
+typedef struct {
+    int var[3]; //vetor com as 3 variaveis de cada clausula
+}Clausula; 
+
+struct formula //TAD da formula
+{
+    int numVar; //numero de variaveis
+    int numClau; //numero de clausulas
+    int *valores
+    Clausula *clausula; //vetor de clausulas
+};
+
 Formula *criaFormula (int n, int m){
     Formula *formula = (Formula *)malloc(sizeof(Formula)); //aloca formula
     if(formula == NULL){ //tratamento de erro
@@ -40,24 +52,16 @@ void imprimeFormula (Formula *formula){
         printf("(");
 
         for (int j=0;j<3;j++){
-           int valor = formula->clausula[i].var[j];
-           int num = valor;
+            int valor = formula->clausula[i].var[j];
+            int num = (valor<0 ? valor * -1 : valor);
 
-           char letra = 'a' + num - 1;
-           
-           if(num<0){
-                num = num * -1; // transforma em positivo
-           }
+            char letra = 'a' + num - 1;
 
-            if(num<0){ //confere se eh negativo
-                    printf("¬%c", letra);
-                } else {
-                    printf("%c", letra);
-                }
+            printf("%s%c",valor<0 ? "¬" : "",letra);
 
-                if (j < 2){
+            if (j < 2){
                 printf(" v ");
-                }
+            }
         }
         printf(") ");
 
@@ -65,13 +69,13 @@ void imprimeFormula (Formula *formula){
             printf("^ ");
         }
     }
+    imprimesolucao(formula,);
 }
 
 
-int solucaoFormula (Formula *formula,int *valores, int indice){
+int solucaoFormula (Formula *formula, int indice){
     if(indice == formula->numVar){ // verifica se valoracao eh satisfeita
-        return 1; //achou uma solucao
-    }
+        return testeformula(formula,valores,indice); 
 
     valores[indice] = 1; // tenta como verdadeiro
     if(solucaoFormula(formula, valores, indice + 1)){
@@ -81,9 +85,49 @@ int solucaoFormula (Formula *formula,int *valores, int indice){
     valores[indice] = 0; // tenta como falso
     if(solucaoFormula(formula, valores, indice + 1)){
         return 1;
-    }
+        }
 
-    return 0;
-} 
+        return 0;
+    } 
+}
+
+void imprimesolucao(Formula *formula){
+    printf("Valoracao: \n");
+    char letra = 'a'
+    num = formula->clausula[i].var[j];
+
+    for(int i =0;i < formula->numVar;i++){
+        printf("%c = %s",letra,valores[i] ? "True \n" : "False \n");
+        letra = letra + 1;     
+        
+    }
+}
+
+    int testeformula(Formula *formula,int indice){
+        int sol = 0;
+        for(int i = 0;i <formula->numClau - 1 ;i++){
+            for(int j = 0;j<3; j++){
+                if(formula->clausula[i].var[j] > 0){
+                    if(valores[formula->clausula[i].var[j] - 1] == 1){
+                        sol++;
+                        break;
+                        
+                    }
+                } else {
+                    if(valores[(formula->clausula[i].var[j] * - 1)-1] == 0){
+                        sol++;
+                        break;
+                    }
+
+                }
+            }
+        }
+
+        if(sol == formula->numClau){
+            return 1;
+        } 
+
+        return 0;
+    }
 
 //Ana Gabriela e Marcus Leandro

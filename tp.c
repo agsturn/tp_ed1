@@ -13,16 +13,18 @@ int main(){
 
     //add as clausulas (tem que fazer a logica ainda la em formula.c)
     printf("digite as clausulas:\n");
+
     for (int i = 0; i < m; i++) {
         int x, y, z;
         scanf("%d %d %d", &x, &y, &z);
         adicionaClausula(f, i, x, y, z);
     }
 
-        destroiFormula(f);
+    solucaoFormula(f);
+    imprimeFormula(f);
+    destroiFormula(f);
 
-        return 0;
-    }
-   
+    return 0;
+}
 
 //Ana Gabriela e Marcus Leandro 
