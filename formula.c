@@ -16,14 +16,14 @@ struct formula //TAD da formula
 Formula *criaFormula (int n, int m){
     Formula *formula = (Formula *)malloc(sizeof(Formula)); //aloca formula
     if(formula == NULL){ //tratamento de erro
-        printf("memoria insuficiente");
+        //printf("memoria insuficiente");
         return NULL;
     }
     formula->numVar = n;
     formula->numClau = m;
     formula->clausula = (Clausula *)malloc(m * sizeof(Clausula)); //aloca clausula
     if (formula->clausula == NULL){ //tratamento de erro
-        printf("memoria insuficiente");
+        //printf("memoria insuficiente");
         free(formula);
         return NULL;
     }
@@ -47,34 +47,35 @@ void adicionaClausula (Formula *formula, int i, int x, int y, int z){
 void imprimeFormula (Formula *formula){
     printf("Formula:\n"); 
     
-    for(int i=0;i<formula->numClau;i++){
+    for(int i = 0; i < formula->numClau; i++){
         printf("(");
 
-        for (int j=0;j<3;j++){
+        for (int j = 0; j < 3; j++){
             int valor = formula->clausula[i].var[j];
-            int num = (valor<0 ? valor * -1 : valor);
+            int num = (valor < 0 ? valor * -1 : valor);
 
             char letra = 'a' + num - 1;
 
-            printf("%s%c",valor<0 ? "¬" : "",letra);
+            printf("%s%c", valor < 0 ? "~" : "", letra);
 
             if (j < 2){
                 printf(" v ");
             }
         }
-        printf(") ");
+        printf(")");
 
         if (i < formula->numClau - 1){
-            printf("^ ");
+            printf(" ∧ ");
         }
     }
-    imprimesolucao
+    printf("\n");
 }
 
 
 int solucaoFormula (Formula *formula,int *valores, int indice){
     if(indice == formula->numVar){ // verifica se valoracao eh satisfeita
         return testeformula(formula,valores,indice); 
+    }
 
     valores[indice] = 1; // tenta como verdadeiro
     if(solucaoFormula(formula, valores, indice + 1)){
@@ -85,48 +86,61 @@ int solucaoFormula (Formula *formula,int *valores, int indice){
     if(solucaoFormula(formula, valores, indice + 1)){
         return 1;
         }
+    return 0;
+} 
 
-        return 0;
-    } 
-}
 
-void imprimesolucao(Formula *formula,int *valores){
-    printf("Valoracao: \n");
-    char letra = 'a'
-    num = formula->clausula[i].var[j];
-
-    for(int i =0;i < formula->numVar;i++){
-        printf("%c = %s",letra,valores[i] ? "True \n" : "False \n");
-        letra = letra + 1;     
-        
+void imprimesolucao(Formula *formula, int *valores){
+    printf("Solução encontrada:\n");
+    
+    for(int i = 0; i < formula->numVar; i++){
+        char letra = 'a' + i;
+        printf("%c: %s\n", letra, valores[i] ? "True" : "False");
     }
 }
 
-    int testeformula(Formula *formula,int *valores, int indice){
-        int sol = 0;
-        for(int i = 0;i <formula->numClau - 1 ;i++){
-            for(int j = 0;j<3; j++){
-                if(formula->clausula[i].var[j] > 0){
-                    if(valores[formula->clausula[i].var[j] - 1] == 1){
-                        sol++;
-                        break;
-                        
-                    }
-                } else {
-                    if(valores[(formula->clausula[i].var[j] * - 1)-1] == 0){
-                        sol++;
-                        break;
-                    }
+int testeformula(Formula *formula, int *valores, int indice)
+{
+    int sol = 0;
 
+    for (int i = 0; i < formula->numClau; i++)
+    {
+        int clausulaSatisfeita = 0;
+
+        for (int j = 0; j < 3; j++)
+        {
+            int var = formula->clausula[i].var[j];
+
+            if (var > 0)
+            {
+                if (valores[var - 1] == 1)
+                {
+                    clausulaSatisfeita = 1;
+                    break;
+                }
+            }
+            else
+            {
+                if (valores[(var * -1) - 1] == 0)
+                {
+                    clausulaSatisfeita = 1;
+                    break;
                 }
             }
         }
 
-        if(sol == formula->numClau){
-            return 1;
-        } 
-
-        return 0;
+        if (clausulaSatisfeita)
+        {
+            sol++;
+        }
     }
+
+    if (sol == formula->numClau)
+    {
+        return 1;
+    }
+
+    return 0;
+}
 
 //Ana Gabriela e Marcus Leandro

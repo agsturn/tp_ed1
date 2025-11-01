@@ -13,5 +13,9 @@ void imprimeFormula (Formula *formula); //imprime o TAD formula no formato 3-CNF
 
 int solucaoFormula (Formula *formula, int *valores, int indice); //tenta achar uma valoração que satisfaça a fórmula
 
+void imprimesolucao(Formula *formula, int *valores);  
+
+int testeformula(Formula *formula, int *valores, int indice);
+
 //Ana Gabriela e Marcus Leandro 
 #endif
