@@ -3,18 +3,25 @@
 
 typedef struct formula Formula;
 
-Formula *criaFormula (int n, int m); //alocar TAD formula vazia
+//aloca TAD formula vazio
+Formula *criaFormula (int n, int m);
 
-void destroiFormula (Formula *formula); //dar free no TAD formula
+//libera memoria do TAD formula
+void destroiFormula (Formula *formula);
 
-void adicionaClausula (Formula *formula, int i, int x, int y, int z); //adiciona uma clausula na formula
+//adiciona uma clausula na formula
+void adicionaClausula (Formula *formula, int i, int x, int y, int z);
 
-void imprimeFormula (Formula *formula); //imprime o TAD formula no formato 3-CNF
+//imprime o TAD formula no formato 3-CNF
+void imprimeFormula (Formula *formula);
 
-int solucaoFormula (Formula *formula, int *valores, int indice); //tenta achar uma valoração que satisfaça a fórmula
+//tenta achar uma valoracao que satisfaca a formula usando backtracking
+int solucaoFormula (Formula *formula, int *valores, int indice);
 
-void imprimesolucao(Formula *formula, int *valores);  
+//imprime a solucao encontrada
+void imprimesolucao(Formula *formula, int *valores);
 
+//verifica se a valoracao atual satisfaz a formula
 int testeformula(Formula *formula, int *valores, int indice);
 
 //Ana Gabriela e Marcus Leandro 
